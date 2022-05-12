@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+spring:
+  kafka:
+    bootstrap-servers: "${KAFKA_SERVER:localhost:90902}"
+    consumer:
+      group-id: "${CONSUMER_GROUP_ID:spring-boot-avro-consumer-id}"
+      keyDeserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
+      valueDeserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
+      autoOffsetReset: "latest"
+      properties:
+        schema:
+          registry:
+            url: "${SCHEMA_REGISTRY:http://localhost:8085}"
+        specific:
+          avro:
+            reader: "true"
+
+avro:
+  topic:
+    name: "MONITORAMENTO"
